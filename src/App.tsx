@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom"
-import Landing from "./pages/Landing"
-import Game from "./pages/Game"
+import Landing from "./pages/Landing/Landing"
+import Games from "./pages/Games/Games"
 import Navbar from "./components/Navbar/Navbar"
 
 function App() {
@@ -10,7 +10,7 @@ function App() {
     <Navbar/>
     <Routes>
       <Route path="/" element={<Landing/>}/>
-      <Route path="/game" element={<Game/>}/>
+      <Route path="/games" element={<Games/>}/>
     </Routes>
     </>
     

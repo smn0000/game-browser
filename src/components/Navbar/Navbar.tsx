@@ -1,10 +1,9 @@
 import {Link} from "react-router-dom"
 import { useMediaQuery } from "usehooks-ts"
-import { motion } from "framer-motion"
+import { motion, AnimatePresence} from "framer-motion"
 import { useState } from "react"
 import "./styles.scss"
-import { BiMenu } from "react-icons/bi"
-import { BiSearch } from "react-icons/bi"
+import { BiSearch, BiMenu } from "react-icons/bi"
 
 
 
@@ -14,7 +13,7 @@ const NavbarLong =  () => {
     <nav className="nav">
       <ul>
           <li><Link to="/">Home</Link></li>
-          <li><Link to="/game">Games</Link></li>
+          <li><Link to="/games">Games</Link></li>
       </ul>
 
       <div className="searchbar">
@@ -27,33 +26,64 @@ const NavbarLong =  () => {
 
 const NavbarMobile = () => {
   const [showMenu, setShowMenu] = useState(false)
+
+  const animateMenu = {
+    hidden:{
+      scaleX:0,
+      opacity:0,
+      
+    },
+    visible:{ 
+      scaleX: 1, 
+      opacity:1, 
+      originX:0, 
+      originY:0,
+      transition:{ duration: .25, when:'beforeChildren', staggerChildren: .2},
+    },
+   
+  }
+
+  const animateMenuChildren = {
+    hidden:{y:-10, opacity:0},
+    visible:{y:0,opacity:1,},
+
+  }
+
   return(
     <nav className="mobile-nav">
+      <button className="hamburger" onClick={() => setShowMenu(current => !current)}>
+        <BiMenu size='48px'/>
+      </button>
 
-      <button className="hamburger" onClick={() => setShowMenu(current => !current)}><BiMenu size='48px'/></button>
-
+      <AnimatePresence>
       {showMenu && 
-      <nav className="mobile-menu">
-        <ul>
-            <li><Link to="/" onClick={() => setShowMenu(current => !current)}>Home</Link></li>
-            <li><Link to="/game" onClick={() => setShowMenu(current => !current)}>Games</Link></li>
-        </ul>
-
-        <div className="searchbar">
-          <input type="text" placeholder="Search..."/>
-          <button className="search-button" onClick={() => setShowMenu(current => !current)}><BiSearch size="32px"/></button>
+        <motion.div className="mobile-menu"
+        initial='hidden'
+        animate='visible'
+        exit='hidden'
+        variants={animateMenu}
+        >
+          <motion.div variants={animateMenuChildren}  className="searchbar">
+            <input type="text" placeholder="Search..."/>
+            <button className="search-button" onClick={() => setShowMenu(current => !current)}><BiSearch size="32px"/></button>
+          </motion.div>
           
-        </div>
+          <ul>
+              <motion.li variants={animateMenuChildren}><Link to="/" onClick={() => setShowMenu(current => !current)}>Home</Link></motion.li>
+              <motion.li variants={animateMenuChildren}><Link to="/games" onClick={() => setShowMenu(current => !current)}>Games</Link></motion.li>
+          </ul>
 
-        <div className="data-by"><p>Data provided by:</p></div>
-      </nav>}
-    </nav>
+          <motion.div variants={animateMenuChildren} className="data-by"><p>Data provided by:</p></motion.div>
+
+        </motion.div>}
+      </AnimatePresence>
+      </nav>
+    
   )}
 
 const Navbar = () => {
 
   const isMobile: boolean = useMediaQuery('(max-width: 1024px)')
-  console.log(isMobile)
 
   return (
     <>
