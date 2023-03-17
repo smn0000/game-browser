@@ -3,6 +3,7 @@ import './styles.scss'
 import { BiCaretLeft, BiCaretRight } from 'react-icons/bi'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useMediaQuery } from "usehooks-ts"
+import Gameinfo from '../Gameinfo/Gameinfo'
 
 const Carousel = ({}) => {
 
@@ -26,7 +27,6 @@ const Carousel = ({}) => {
   
     }
 
-    
     const reducer = (state:number, action:any) =>{
       switch(action.type){
         case 'PREVIOUS':
@@ -39,8 +39,10 @@ const Carousel = ({}) => {
           throw Error('Unknown action.')
       }
     }
+
     const [selected, dispatch] = useReducer(reducer, 1)
     const [count, setCount] = useState(0)
+    const [showMore, setShowMore] = useState(false)
 
     const isMobile:boolean = useMediaQuery('(max-width: 1024px)')
 
@@ -68,30 +70,46 @@ const Carousel = ({}) => {
         setCount(previous=>previous-1)
       }
     }
- // 
+
+    const handleShowMore = () => {
+      setShowMore((previous => !previous))
+
+    }
   return (
 
     <div className='carousel'>
         {!isMobile && <button className='sidebar prev-btn' onClick={() => {dispatch({type:'PREVIOUS'}); setCount(previous=>previous-1)}}><BiCaretLeft/></button>}
-        <div className='main-content'>
+        <div className='card'>
           <AnimatePresence custom={direction}>
-            <motion.div className='item' style={{backgroundImage:`url(${card.background_image})`}} key={count}
+            <motion.div className='item' style={{backgroundImage:`url(${card.background_image})`}} key={count} onDoubleClick={handleShowMore}
             initial='initial' animate='animate' exit='exit' variants={cardAnimation} custom={direction} transition={{duration:.5}}  onPanEnd={(event , info) => Math.abs(Number(info.offset.x)) > 50 && handlePan(info.offset.x)}>
             <p className='title'>{card.name}</p>
+            <p className='rating'>Rating: {card.rating}</p>
             
               
             </motion.div>
           </AnimatePresence>
         </div>
         {isMobile && <div className='dots'>
+       
           <>
-          {MOCK_DATA.map(el => <motion.button className={el.id === card.id ? 'dot active' : 'dot'} key={el.id} //Couldn't figure out how to animate with framer motion so animated with css instead
-          onClick={() => {dispatch({type:'GOTO', payload:el.id}); setCount(el.id > card.id ? previous=>previous+1 : previous=>previous-1)}}>
-          </motion.button>)}
-          
+            {MOCK_DATA.map(el => el.id===card.id ?
+            <motion.button className='dot' key={el.id} initial={{scale:1}} animate={{scale:1.5}} exit={{scale:1}} transition={{duration: .05}}
+            onClick={() => {card.id !== el.id && dispatch({type:'GOTO', payload:el.id}); card.id !== el.id && setCount(el.id > card.id ? previous=>previous+1 : previous=>previous-1)}}>
+            </motion.button>
+            :
+            <button className='dot' key={el.id}
+            onClick={() => {card.id !== el.id && dispatch({type:'GOTO', payload:el.id}); card.id !== el.id && setCount(el.id > card.id ? previous=>previous+1 : previous=>previous-1)}}>
+            </button>
+            )}
           </>
+          
         </div>}
+        
         {!isMobile && <button className='sidebar next-btn'onClick={() => {dispatch({type:'NEXT'}); setCount(previous=>previous+1)} }><BiCaretRight/></button>}
+        <AnimatePresence>
+          {showMore && <Gameinfo data={card} onClose={handleShowMore}/>}
+        </AnimatePresence>
     </div>
   )
 }
