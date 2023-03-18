@@ -58,29 +58,35 @@ const Carousel = ({}) => {
     }
 
     const handleShowMore = () => {
-      setShowMore((previous => !previous))
-
+      setShowMore(true)
+    }
+    const handleHideMore = (e:any) =>{
+      if(e.target === e.currentTarget){
+        setShowMore(false)
+        }
     }
   return (
+    <>
+      <AnimatePresence>
+      {showMore && <Gameinfo data={card} onClose={handleHideMore}/>}
+      </AnimatePresence>
 
-    <div className='carousel'>
-        <button className='sidebar prev-btn' onClick={() => {dispatch({type:'PREVIOUS'}); setCount(previous=>previous-1)}}><BiCaretLeft/></button>
-        <div className='card'>
-          <AnimatePresence custom={direction}>
-            <motion.div className='item' style={{backgroundImage:`url(${card.background_image})`}} key={count}
-            initial='initial' animate='animate' exit='exit' variants={cardAnimation} custom={direction} transition={{duration:.5}} >
-            <p className='title'>{card.name}</p>
-            <p className='rating'>Rating: {card.rating}</p>
-            
-            </motion.div>
-          </AnimatePresence>
-        </div>
-        
-        <button className='sidebar next-btn'onClick={() => {dispatch({type:'NEXT'}); setCount(previous=>previous+1)} }><BiCaretRight/></button>
-        <AnimatePresence>
-          {showMore && <Gameinfo data={card} onClose={handleShowMore}/>}
-        </AnimatePresence>
-    </div>
+      <div className='carousel'>
+          <button className='sidebar prev-btn' onClick={() => {dispatch({type:'PREVIOUS'}); setCount(previous=>previous-1)}}><BiCaretLeft/></button>
+          <div className='card'>
+            <AnimatePresence custom={direction}>
+              <motion.div className='item' style={{backgroundImage:`url(${card.background_image})`}} key={count} onClick={handleShowMore}
+              initial='initial' animate='animate' exit='exit' variants={cardAnimation} custom={direction} transition={{duration:.5}} >
+              <p className='title'>{card.name}</p>
+              <p className='rating'>Rating: {card.rating}</p>
+              
+              </motion.div>
+            </AnimatePresence>
+          </div>
+          
+          <button className='sidebar next-btn'onClick={() => {dispatch({type:'NEXT'}); setCount(previous=>previous+1)} }><BiCaretRight/></button>
+      </div>
+    </>
   )
 }
 

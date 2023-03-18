@@ -1,7 +1,7 @@
 import {useState, useReducer} from 'react'
 import './styles.scss'
 import { motion, AnimatePresence } from 'framer-motion'
-import Gameinfo from '../Gameinfo/Gameinfo'
+import GameinfoMobile from '../Gameinfo/GameinfoMobile'
 
 const CarouselMobile = ({}) => {
 
@@ -68,37 +68,37 @@ const CarouselMobile = ({}) => {
 
     const handleShowMore = () => {
       setShowMore((previous => !previous))
-
     }
   return (
-
-    <div className='carousel'>
-        <div className='card'>
-          <AnimatePresence custom={direction}>
-            <motion.div className='item' style={{backgroundImage:`url(${card.background_image})`}} key={count} onDoubleClick={handleShowMore}
-            initial='initial' animate='animate' exit='exit' variants={cardAnimation} custom={direction} transition={{duration:.5}}  onPanEnd={(event , info) => Math.abs(Number(info.offset.x)) > 50 && handlePan(info.offset.x)}>
-            <p className='title'>{card.name}</p>
-            <p className='rating'>Rating: {card.rating}</p>
-            
-              
-            </motion.div>
-          </AnimatePresence>
-        </div>
-        <div className='dots'>
-            {MOCK_DATA.map(el => el.id===card.id ?
-            <motion.button className='dot' key={el.id} initial={{scale:1}} animate={{scale:1.5}} exit={{scale:1}} transition={{duration: .05}}
-            onClick={() => {card.id !== el.id && dispatch({type:'GOTO', payload:el.id}); card.id !== el.id && setCount(el.id > card.id ? previous=>previous+1 : previous=>previous-1)}}>
-            </motion.button>
-            :
-            <button className='dot' key={el.id}
-            onClick={() => {card.id !== el.id && dispatch({type:'GOTO', payload:el.id}); card.id !== el.id && setCount(el.id > card.id ? previous=>previous+1 : previous=>previous-1)}}>
-            </button>
-            )}
-        </div>
+    <>
         <AnimatePresence>
-          {showMore && <Gameinfo data={card} onClose={handleShowMore}/>}
+            {showMore && <GameinfoMobile data={card} onClose={handleShowMore}/>}
         </AnimatePresence>
-    </div>
+        <div className='carousel'>
+            <div className='card'>
+            <AnimatePresence custom={direction}>
+                <motion.div className='item' style={{backgroundImage:`url(${card.background_image})`}} key={count} onDoubleClick={handleShowMore}
+                initial='initial' animate='animate' exit='exit' variants={cardAnimation} custom={direction} transition={{duration:.5}}  onPanEnd={(event , info) => Math.abs(Number(info.offset.x)) > 50 && handlePan(info.offset.x)}>
+                <p className='title'>{card.name}</p>
+                <p className='rating'>Rating: {card.rating}</p>
+                
+                
+                </motion.div>
+            </AnimatePresence>
+            </div>
+            <div className='dots'>
+                {MOCK_DATA.map(el => el.id===card.id ?
+                <motion.button className='dot' key={el.id} initial={{scale:1}} animate={{scale:1.5}} exit={{scale:1}} transition={{duration: .05}}
+                onClick={() => {card.id !== el.id && dispatch({type:'GOTO', payload:el.id}); card.id !== el.id && setCount(el.id > card.id ? previous=>previous+1 : previous=>previous-1)}}>
+                </motion.button>
+                :
+                <button className='dot' key={el.id}
+                onClick={() => {card.id !== el.id && dispatch({type:'GOTO', payload:el.id}); card.id !== el.id && setCount(el.id > card.id ? previous=>previous+1 : previous=>previous-1)}}>
+                </button>
+                )}
+            </div>
+        </div>
+    </>
   )
 }
 
