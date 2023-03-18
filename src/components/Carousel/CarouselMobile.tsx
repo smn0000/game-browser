@@ -1,10 +1,9 @@
 import {useState, useReducer} from 'react'
 import './styles.scss'
-import { BiCaretLeft, BiCaretRight } from 'react-icons/bi'
 import { motion, AnimatePresence } from 'framer-motion'
 import Gameinfo from '../Gameinfo/Gameinfo'
 
-const Carousel = ({}) => {
+const CarouselMobile = ({}) => {
 
     const MOCK_DATA =[{"id":1,"slug":"Antonietta","name":"TOPICAL STARCH","released":"2018-08-07","background_image":"http://dummyimage.com/155x100.png/dddddd/000000","rating":3},
     {"id":2,"slug":"Pavel","name":"DIPHENHYDRAMINE HYDROCHLORIDE","released":"2011-04-25","background_image":"http://dummyimage.com/102x100.png/dddddd/000000","rating":10},
@@ -29,9 +28,9 @@ const Carousel = ({}) => {
     const reducer = (state:number, action:any) =>{
       switch(action.type){
         case 'PREVIOUS':
-          return (state===1 ? MOCK_DATA.length : state-1)
+          return (state === 1 ? MOCK_DATA.length : state-1)
         case 'NEXT':
-          return (state===MOCK_DATA.length ? 1 : state+1)
+          return (state === MOCK_DATA.length ? 1 : state+1)
         case 'GOTO':
           return action.payload
         default:
@@ -44,7 +43,6 @@ const Carousel = ({}) => {
     const [showMore, setShowMore] = useState(false)
     const prev:any = usePrev(count)
 
-
     let direction:number = prev < count ? 1 : -1
 
     
@@ -56,6 +54,17 @@ const Carousel = ({}) => {
       animate: { x: 0 },
       exit: (direction:number) => ({ x: direction === 1 ? '-100%' : '100%' }),
     }
+ 
+    const handlePan = (offset:number) => {
+      if(offset < 0) {
+        dispatch({type:'NEXT'})
+        setCount(previous=>previous+1)
+      }
+      else{
+        dispatch({type:'PREVIOUS'})
+        setCount(previous=>previous-1)
+      }
+    }
 
     const handleShowMore = () => {
       setShowMore((previous => !previous))
@@ -64,19 +73,28 @@ const Carousel = ({}) => {
   return (
 
     <div className='carousel'>
-        <button className='sidebar prev-btn' onClick={() => {dispatch({type:'PREVIOUS'}); setCount(previous=>previous-1)}}><BiCaretLeft/></button>
         <div className='card'>
           <AnimatePresence custom={direction}>
-            <motion.div className='item' style={{backgroundImage:`url(${card.background_image})`}} key={count}
-            initial='initial' animate='animate' exit='exit' variants={cardAnimation} custom={direction} transition={{duration:.5}} >
+            <motion.div className='item' style={{backgroundImage:`url(${card.background_image})`}} key={count} onDoubleClick={handleShowMore}
+            initial='initial' animate='animate' exit='exit' variants={cardAnimation} custom={direction} transition={{duration:.5}}  onPanEnd={(event , info) => Math.abs(Number(info.offset.x)) > 50 && handlePan(info.offset.x)}>
             <p className='title'>{card.name}</p>
             <p className='rating'>Rating: {card.rating}</p>
             
+              
             </motion.div>
           </AnimatePresence>
         </div>
-        
-        <button className='sidebar next-btn'onClick={() => {dispatch({type:'NEXT'}); setCount(previous=>previous+1)} }><BiCaretRight/></button>
+        <div className='dots'>
+            {MOCK_DATA.map(el => el.id===card.id ?
+            <motion.button className='dot' key={el.id} initial={{scale:1}} animate={{scale:1.5}} exit={{scale:1}} transition={{duration: .05}}
+            onClick={() => {card.id !== el.id && dispatch({type:'GOTO', payload:el.id}); card.id !== el.id && setCount(el.id > card.id ? previous=>previous+1 : previous=>previous-1)}}>
+            </motion.button>
+            :
+            <button className='dot' key={el.id}
+            onClick={() => {card.id !== el.id && dispatch({type:'GOTO', payload:el.id}); card.id !== el.id && setCount(el.id > card.id ? previous=>previous+1 : previous=>previous-1)}}>
+            </button>
+            )}
+        </div>
         <AnimatePresence>
           {showMore && <Gameinfo data={card} onClose={handleShowMore}/>}
         </AnimatePresence>
@@ -84,4 +102,4 @@ const Carousel = ({}) => {
   )
 }
 
-export default Carousel
+export default CarouselMobile
