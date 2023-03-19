@@ -3,18 +3,8 @@ import './styles.scss'
 import { motion, AnimatePresence } from 'framer-motion'
 import GameinfoMobile from '../Gameinfo/GameinfoMobile'
 
-const CarouselMobile = ({}) => {
+const CarouselMobile = ({data}) => {
 
-    const MOCK_DATA =[{"id":1,"slug":"Antonietta","name":"TOPICAL STARCH","released":"2018-08-07","background_image":"http://dummyimage.com/155x100.png/dddddd/000000","rating":3},
-    {"id":2,"slug":"Pavel","name":"DIPHENHYDRAMINE HYDROCHLORIDE","released":"2011-04-25","background_image":"http://dummyimage.com/102x100.png/dddddd/000000","rating":10},
-    {"id":3,"slug":"Welch","name":"docusate sodium and sennosides","released":"2002-09-15","background_image":"http://dummyimage.com/179x100.png/5fa2dd/ffffff","rating":5},
-    {"id":4,"slug":"Brennan","name":"Ragweed False Bur","released":"2020-10-19","background_image":"http://dummyimage.com/163x100.png/ff4444/ffffff","rating":9},
-    {"id":5,"slug":"Gusella","name":"Cyclopentolate Hydrochloride","released":"2005-02-17","background_image":"http://dummyimage.com/126x100.png/ff4444/ffffff","rating":10},
-    {"id":6,"slug":"Duky","name":"Sodium Fluoride and Triclosan","released":"2003-01-19","background_image":"http://dummyimage.com/196x100.png/ff4444/ffffff","rating":8},
-    {"id":7,"slug":"Jonell","name":"Ranitidine","released":"2006-12-06","background_image":"http://dummyimage.com/182x100.png/ff4444/ffffff","rating":7},
-    {"id":8,"slug":"Saidee","name":"Sulfamethoxazole and Trimethoprim","released":"2023-02-22","background_image":"http://dummyimage.com/204x100.png/ff4444/ffffff","rating":2},
-    {"id":9,"slug":"Dorie","name":"Mosquito","released":"2009-05-10","background_image":"http://dummyimage.com/114x100.png/5fa2dd/ffffff","rating":10},
-    {"id":10,"slug":"Skelly","name":"Nizatidine","released":"2002-02-16","background_image":"http://dummyimage.com/121x100.png/ff4444/ffffff","rating":1}]
 
     const usePrev = (state:any) =>{
       const [tuple, setTuple] = useState([null, state])
@@ -28,9 +18,9 @@ const CarouselMobile = ({}) => {
     const reducer = (state:number, action:any) =>{
       switch(action.type){
         case 'PREVIOUS':
-          return (state === 1 ? MOCK_DATA.length : state-1)
+          return (state === 1 ? data.length : state-1)
         case 'NEXT':
-          return (state === MOCK_DATA.length ? 1 : state+1)
+          return (state === data.length ? 1 : state+1)
         case 'GOTO':
           return action.payload
         default:
@@ -47,7 +37,7 @@ const CarouselMobile = ({}) => {
 
     
 
-    const card = MOCK_DATA.filter(el=> el.id === selected)[0]
+    const card = data.filter(el=> el.id === selected)[0]
 
     const cardAnimation = {
       initial: (direction:number) => ({ x: direction === 1 ? '100%' : '-100%' }),
@@ -87,7 +77,7 @@ const CarouselMobile = ({}) => {
             </AnimatePresence>
             </div>
             <div className='dots'>
-                {MOCK_DATA.map(el => el.id===card.id ?
+                {data.map(el => el.id===card.id ?
                 <motion.button className='dot' key={el.id} initial={{scale:1}} animate={{scale:1.5}} exit={{scale:1}} transition={{duration: .05}}
                 onClick={() => {card.id !== el.id && dispatch({type:'GOTO', payload:el.id}); card.id !== el.id && setCount(el.id > card.id ? previous=>previous+1 : previous=>previous-1)}}>
                 </motion.button>

@@ -8,9 +8,8 @@
 
 .sidebar{
     position: absolute;
-    background-color: #00000080;
+    background-color: #00000034;
     aspect-ratio: 1;
-    max-width: 4rem;
     width: 10%;
     min-width: 2rem;
     height: 100%;
@@ -51,9 +50,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-repeat: no-repeat;
+    background-repeat:no-repeat;
     background-size: cover;
-    background-position: center;
+    background-position: auto;
     user-select: none;
     touch-action: none;
     cursor: pointer;
@@ -63,18 +62,20 @@
     position: absolute;
     bottom: 0;
     height: 10%;
-    width: 100%;
+    width: 80%;
+    margin-left: 10%;
     display: flex;
     padding: 0 1rem;
     justify-content: center;
     gap: 1rem;
     align-items: center;
-
+    
+    background-color: #00000034;
 
     .dot{
         height: 45%;
         aspect-ratio: 1;
-        background-color: #000000be;
+        background-color: white;
         border-radius: 50%;
         transition: .2s;
         &.active{
@@ -85,7 +86,7 @@
         height: 15%;
         width: 100%;
         gap: 0;
-        background-color: #0000003d;
+        margin: 0;
         justify-content: space-between;
     }
 }
@@ -108,7 +109,7 @@
             position: absolute;
             z-index: -1;
             inset: 0;
-            background-color: rgba(0, 0, 0, 0.171);
+            background-color: #00000034;
         }
 
         p{  

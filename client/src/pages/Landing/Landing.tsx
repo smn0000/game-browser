@@ -1,19 +1,45 @@
-import React from 'react'
 import './styles.scss'
 import Carousel from '../../components/Carousel/Carousel'
 import CarouselMobile from '../../components/Carousel/CarouselMobile'
 import { useMediaQuery } from 'usehooks-ts'
+import { useState, useEffect } from 'react'
+import axios from 'axios'
 
 const Landing = () => {
   const isMobile:boolean = useMediaQuery('(max-width: 1024px)')
+  const [carouselData, setCarouselData] = useState()
 
+
+
+  useEffect(()=>{
+
+    
+ /*    fetch(`https://api.rawg.io/api/games?key=${import.meta.env.VITE_API_KEY}`)
+      .then(response => response.json())
+      .then(response => {
+        let counter = 1
+        response.results.forEach(element => {
+        element.id=counter
+        counter++})
+      })
+      .catch(err => console.error(err)); */
+
+      fetch('http://localhost:5000/api')
+      .then(response => response.json())
+      .then(data => setCarouselData(data.results))
+      .catch(err => console.error(err))
+    }
+   ,[])
+   
   return (
     <div className='landing'>
       <h1>GAMES</h1>
       <p>Top Games</p>
       <div className='carousel-container'>
-        {isMobile ? <CarouselMobile/> :<Carousel/> }
-        
+        {carouselData && <>
+          {isMobile ? <CarouselMobile data={carouselData}/> :<Carousel data={carouselData}/>}
+        </>
+        }
       </div>
       <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus magnam unde consectetur repellat odit excepturi dolore accusamus et commodi nobis nulla a nihil libero modi ea, nemo quia ab perspiciatis!
       Veniam beatae ratione minus, nobis consequatur vitae. Ipsa optio pariatur voluptatem quas, voluptate saepe nihil soluta repellat doloremque laboriosam veniam illo architecto temporibus. Quaerat odit minus quos perferendis fuga in.
