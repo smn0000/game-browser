@@ -1,14 +1,16 @@
 import {Link} from "react-router-dom"
 import { useMediaQuery } from "usehooks-ts"
 import { motion, AnimatePresence} from "framer-motion"
-import { useState } from "react"
+import { useState, useRef } from "react"
 import "./styles.scss"
 import { BiSearch, BiMenu } from "react-icons/bi"
+import { useNavigate } from "react-router-dom"
 
 
 
 
-const NavbarLong =  () => {
+const NavbarLong =  ({handleSearch}: {handleSearch:any}) => {
+  const input = useRef(null)
   return(
     <nav className="nav">
       <ul>
@@ -16,16 +18,18 @@ const NavbarLong =  () => {
           <li><Link to="/games">Games</Link></li>
       </ul>
 
-      <div className="searchbar">
-        <input type="text" placeholder="Search..."/>
-      </div>
+      <form className="searchbar" onSubmit={(e) => {e.preventDefault(); handleSearch(input.current) }}>
+        <input type="text" ref={input} placeholder="Search..."/>
+        <button className="search-button"><BiSearch size="32px"/></button>
+      </form>
 
       <div>Data provided by:</div>
     </nav>
   )}
 
-const NavbarMobile = () => {
+const NavbarMobile = ({handleSearch}: {handleSearch:any}) => {
   const [showMenu, setShowMenu] = useState(false)
+  const input = useRef(null)
 
   const animateMenu = {
     hidden:{
@@ -49,6 +53,7 @@ const NavbarMobile = () => {
 
   }
 
+
   return(
     <nav className="mobile-nav">
       <button className="hamburger" onClick={() => setShowMenu(current => !current)}>
@@ -63,10 +68,10 @@ const NavbarMobile = () => {
         exit='hidden'
         variants={animateMenu}
         >
-          <motion.div variants={animateMenuChildren}  className="searchbar">
-            <input type="text" placeholder="Search..."/>
+          <motion.form variants={animateMenuChildren}  className="searchbar" onSubmit={(e) => {e.preventDefault();  handleSearch(input.current) }}>
+            <input type="text"  ref={input} placeholder="Search..."/>
             <button className="search-button" onClick={() => setShowMenu(current => !current)}><BiSearch size="32px"/></button>
-          </motion.div>
+          </motion.form>
           
           <ul>
               <motion.li variants={animateMenuChildren}><Link to="/" onClick={() => setShowMenu(current => !current)}>Home</Link></motion.li>
@@ -81,13 +86,23 @@ const NavbarMobile = () => {
     
   )}
 
-const Navbar = () => {
+const Navbar = ({setSearch}: {setSearch:any}) => {
 
   const isMobile: boolean = useMediaQuery('(max-width: 1024px)')
+  const navigate = useNavigate()
+
+  const handleSearch = (input:any)=>{
+    if(!input.value.match(/^ *$/)){
+      setSearch(input.value)
+      navigate('/search')
+      input.value = ''
+    }
+  }
+  
 
   return (
     <>
-    {(isMobile ? <NavbarMobile/> : <NavbarLong/>)}
+    {(isMobile ? <NavbarMobile handleSearch={handleSearch}/> : <NavbarLong handleSearch={handleSearch}/>)}
     </>
     
   )

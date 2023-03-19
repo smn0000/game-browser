@@ -83,7 +83,22 @@ const Carousel = ({}) => {
               </motion.div>
             </AnimatePresence>
           </div>
-          
+         
+          <div className='dots'>
+                {MOCK_DATA.map(el => el.id===card.id ?
+               
+                <motion.button className='dot' key={el.id} initial={{scale:1}} animate={{scale:1.5}} exit={{scale:1}} transition={{duration: .05}}
+                onClick={() => {card.id !== el.id && dispatch({type:'GOTO', payload:el.id}); card.id !== el.id && setCount(el.id > card.id ? previous=>previous+1 : previous=>previous-1)}}>
+                </motion.button>
+                
+                :
+                <motion.button className='dot' key={el.id} initial={{scale:1}} transition={{duration: .05}}
+                onClick={() => {card.id !== el.id && dispatch({type:'GOTO', payload:el.id}); card.id !== el.id && setCount(el.id > card.id ? previous=>previous+1 : previous=>previous-1)}}>
+                </motion.button>
+                )}
+               
+            </div>
+           
           <button className='sidebar next-btn'onClick={() => {dispatch({type:'NEXT'}); setCount(previous=>previous+1)} }><BiCaretRight/></button>
       </div>
     </>

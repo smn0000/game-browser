@@ -92,9 +92,9 @@ const CarouselMobile = ({}) => {
                 onClick={() => {card.id !== el.id && dispatch({type:'GOTO', payload:el.id}); card.id !== el.id && setCount(el.id > card.id ? previous=>previous+1 : previous=>previous-1)}}>
                 </motion.button>
                 :
-                <button className='dot' key={el.id}
+                <motion.button className='dot' key={el.id} initial={{scale:1}}
                 onClick={() => {card.id !== el.id && dispatch({type:'GOTO', payload:el.id}); card.id !== el.id && setCount(el.id > card.id ? previous=>previous+1 : previous=>previous-1)}}>
-                </button>
+                </motion.button>
                 )}
             </div>
         </div>
