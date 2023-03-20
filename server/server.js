@@ -35,6 +35,7 @@ const parseResult = (data) => {
   return data
 }
 
+app.use(express.static(path.join(__dirname + 'public')))
 
 app.get('/api/carousel', cache('24 hour'), (req, res) =>{ 
   axios.get(`https://api.rawg.io/api/games?key=${process.env.API_KEY}`)
