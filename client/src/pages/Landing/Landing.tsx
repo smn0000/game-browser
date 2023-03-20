@@ -12,21 +12,9 @@ const Landing = () => {
 
 
   useEffect(()=>{
-
-    
- /*    fetch(`https://api.rawg.io/api/games?key=${import.meta.env.VITE_API_KEY}`)
+      fetch('http://127.0.0.1:5000/api/carousel')
       .then(response => response.json())
-      .then(response => {
-        let counter = 1
-        response.results.forEach(element => {
-        element.id=counter
-        counter++})
-      })
-      .catch(err => console.error(err)); */
-
-      fetch('http://localhost:5000/api')
-      .then(response => response.json())
-      .then(data => setCarouselData(data.results))
+      .then(data => setCarouselData(data))
       .catch(err => console.error(err))
     }
    ,[])

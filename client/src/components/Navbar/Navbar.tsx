@@ -86,7 +86,7 @@ const NavbarMobile = ({handleSearch}: {handleSearch:any}) => {
     
   )}
 
-const Navbar = ({setSearch}: {setSearch:any}) => {
+const Navbar = ({setSearch}:{setSearch:Function}) => {
 
   const isMobile: boolean = useMediaQuery('(max-width: 1024px)')
   const navigate = useNavigate()
