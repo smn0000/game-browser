@@ -4,7 +4,15 @@ import { BiCaretLeft, BiCaretRight } from 'react-icons/bi'
 import { motion, AnimatePresence } from 'framer-motion'
 import Gameinfo from '../Gameinfo/Gameinfo'
 
-const Carousel = ({ data }) => {
+interface Object {
+  id: number
+  name: string
+  background_image: string
+  released: string
+  rating: number
+  }
+
+const Carousel = ({ data }: {data:Object[]}) => {
     
   
     const usePrev = (state:any) =>{

@@ -4,9 +4,14 @@ const axios = require('axios')
 const cors = require('cors')
 const apicache = require('apicache')
 const rateLimit = require('express-rate-limit')
+const path = require('path')
+
+
 require('dotenv').config()
 
 const app = express()
+
+
 
 app.use(cors())
 
@@ -14,7 +19,7 @@ let cache = apicache.middleware
 
 const limiter = rateLimit({
   windowMs: 1000,
-  max:1
+  max:10
 })
 
 app.use(limiter)
@@ -30,9 +35,6 @@ const parseResult = (data) => {
   return data
 }
 
-
-axios.get(`https://api.rawg.io/api/games?key=${process.env.API_KEY}`)
-    .then(response =>  dataCarousel = response)
 
 app.get('/api/carousel', cache('24 hour'), (req, res) =>{ 
   axios.get(`https://api.rawg.io/api/games?key=${process.env.API_KEY}`)

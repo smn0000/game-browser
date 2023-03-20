@@ -3,7 +3,16 @@ import './styles.scss'
 import { motion, AnimatePresence } from 'framer-motion'
 import GameinfoMobile from '../Gameinfo/GameinfoMobile'
 
-const CarouselMobile = ({data}) => {
+interface Object {
+  id: number
+  name: string
+  background_image: string
+  released: string
+  rating: number
+  }
+
+
+const CarouselMobile = ({data} : {data:Object[]}) => {
 
 
     const usePrev = (state:any) =>{

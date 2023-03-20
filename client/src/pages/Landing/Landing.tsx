@@ -12,7 +12,7 @@ const Landing = () => {
 
 
   useEffect(()=>{
-      fetch('http://127.0.0.1:5000/api/carousel')
+      fetch('/api/carousel')
       .then(response => response.json())
       .then(data => setCarouselData(data))
       .catch(err => console.error(err))

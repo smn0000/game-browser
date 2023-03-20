@@ -14,7 +14,7 @@ const Search = ({search} : {search:string}) => {
 
   useEffect(() => {
     if(search !== null){
-      fetch(`http://127.0.0.1:5000/api/search?search=${search}`)
+      fetch(`api/search?search=${search}`)
       .then(response => response.json())
       .then(data => setData(data))
       .catch(err => console.log(err))
