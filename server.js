@@ -1,4 +1,4 @@
-const PORT = 5000
+require('dotenv').config()
 const express = require('express');
 const axios = require('axios')
 const cors = require('cors')
@@ -7,8 +7,8 @@ const rateLimit = require('express-rate-limit')
 const path = require('path')
 
 
-require('dotenv').config()
 
+const PORT = process.env.PORT || 5000
 const app = express()
 
 app.use(cors())
