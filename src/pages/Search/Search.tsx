@@ -15,7 +15,7 @@ const Search = ({search} : {search:string}) => {
   useEffect(() => {
     if(search !== null){
       fetch(`api/search?search=${search}`)
-      .then(response => response.json())
+      .then(response => {console.log(response); return response.json()})
       .then(data => setData(data))
       .catch(err => console.log(err))
   }

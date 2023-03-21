@@ -8,7 +8,6 @@ import Search from "./pages/Search/Search"
 function App() {
 
   const [search, setSearch]:any= useState(null)
-
     return (
     <>
     <Navbar setSearch={setSearch}/>

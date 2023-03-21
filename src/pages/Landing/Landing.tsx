@@ -13,7 +13,7 @@ const Landing = () => {
 
   useEffect(()=>{
       fetch('/api/carousel')
-      .then(response => response.json())
+      .then(response => {console.log(response); return response.json()})
       .then(data => setCarouselData(data))
       .catch(err => console.error(err))
     }
