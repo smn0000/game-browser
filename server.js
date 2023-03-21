@@ -34,7 +34,7 @@ const parseResult = (data) => {
 }
 
   app.get('/', (req,res) => {
-    res.sendFile(path.join(__dirname, '/front/public/main.html'))
+    res.sendFile(path.join(__dirname, './main.html'))
   })
 /* app.use(express.static(path.join(__dirname,"/front/public/")));
 
