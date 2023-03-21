@@ -19,11 +19,13 @@ const NavbarLong =  ({handleSearch}: {handleSearch:any}) => {
       </ul>
 
       <form className="searchbar" onSubmit={(e) => {e.preventDefault(); handleSearch(input.current) }}>
-        <input type="text" ref={input} placeholder="Search..."/>
-        <button className="search-button"><BiSearch size="32px"/></button>
+        <div className="search-wrapper">
+          <input type="text" ref={input} placeholder="Search..."/>
+          <button className="search-button"><BiSearch size="32px"/></button>
+        </div>
       </form>
 
-      <div>Data provided by:</div>
+      <div className="data-attribution">Data provided by <a href="https://rawg.io/" target='_blank'>RAWG.IO</a></div>
     </nav>
   )}
 
@@ -69,8 +71,10 @@ const NavbarMobile = ({handleSearch}: {handleSearch:any}) => {
         variants={animateMenu}
         >
           <motion.form variants={animateMenuChildren}  className="searchbar" onSubmit={(e) => {e.preventDefault();  handleSearch(input.current) }}>
-            <input type="text"  ref={input} placeholder="Search..."/>
-            <button className="search-button" onClick={() => setShowMenu(current => !current)}><BiSearch size="32px"/></button>
+            <div className="search-wrapper">
+              <input type="text"  ref={input} placeholder="Search..."/>
+              <button className="search-button" onClick={() => setShowMenu(current => !current)}><BiSearch size="32px"/></button>
+            </div>
           </motion.form>
           
           <ul>
@@ -78,7 +82,7 @@ const NavbarMobile = ({handleSearch}: {handleSearch:any}) => {
               <motion.li variants={animateMenuChildren}><Link to="/games" onClick={() => setShowMenu(current => !current)}>Games</Link></motion.li>
           </ul>
 
-          <motion.div variants={animateMenuChildren} className="data-by"><p>Data provided by:</p></motion.div>
+          <motion.div variants={animateMenuChildren} className="data-by"><div className="data-attribution">Data provided by <a href="https://rawg.io/" target='_blank'>RAWG.IO</a></div></motion.div>
 
         </motion.div>}
       </AnimatePresence>

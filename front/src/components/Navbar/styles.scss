@@ -28,10 +28,38 @@ input{
     padding: 0 1rem;
 }
 
+.search-wrapper{
+    display: flex;
+    justify-content: center;
+    color: black;
+    height: 100%;
+    width: 350px;
+    align-items: center;
+    position: relative;
+
+    input{
+        height: 32px;
+    }
+
+    .search-button{
+        position: absolute;
+        right: 0;
+        background-color:#333;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    svg{
+        fill:white;
+    }
+
+}
+
 .nav{
     display: flex;
     justify-content: space-between;
     align-items: center;
+   
 
     ul{
         display: flex;
@@ -39,17 +67,7 @@ input{
         align-items: center;
         gap: 10px;
     }
-    
-    .searchbar{
-        display: flex;
-        justify-content: center;
-        color: black;
-        height: 100%;
-        width: 350px;
-        display: flex;
-        align-items: center;
 
-    }
 
 }
 
@@ -85,28 +103,27 @@ input{
         gap: .5rem;
     }
 
-    .searchbar{
-        
+    .search-wrapper{
         order: -1;
         display: flex;
         align-items: center;
         height: 2rem;
+        width: 100%;
         
-        
+        .search-button{
+            background-color: transparent;
+            svg{
+                fill:black;
+            }
+            
+        }
+
         input{
             width: 100%;
             height: 100%;
-            border-radius: .5rem 0 0 .5rem;
+            border-radius: .5rem;
             padding: 0 1rem;
         }
-
-        .search-button{
-            background-color: transparent;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
         
     }
 
@@ -122,4 +139,12 @@ input{
         font-size: 1rem;
     }
    }
+}
+
+.data-attribution{
+    font-size: 1rem;
+
+    a{
+        font-weight: bold;
+    }
 }
