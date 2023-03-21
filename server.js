@@ -33,10 +33,7 @@ const parseResult = (data) => {
   return data
 }
 
-  app.get('/', (req,res) => {
-    res.sendFile(path.join(__dirname, './main.html'))
-  })
-/* app.use(express.static(path.join(__dirname,"/front/public/")));
+app.use(express.static(path.join(__dirname,"/front/public/")));
 
 app.get('/api/carousel', cache('24 hour'), (req, res) =>{ 
   axios.get(`https://api.rawg.io/api/games?key=${process.env.API_KEY}`)
@@ -47,5 +44,5 @@ app.get('/api/search', cache('24 hour'), (req, res) =>{
   axios.get(`https://api.rawg.io/api/games?key=${process.env.API_KEY}&search=${req.query.search}&metacritic=1,100`)
     .then(response => res.json(response.data.results))
 })
- */
+
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`))
