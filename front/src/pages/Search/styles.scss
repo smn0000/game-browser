@@ -12,16 +12,3 @@
         padding: 1rem;
     }
 }
-
-.search-card{
-    width: 15rem;
-    aspect-ratio: 9/16;
-    flex-grow: .3;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-
-    @media (max-width:1024px) {
-        width: 10rem;
-    }
-}

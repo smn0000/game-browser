@@ -6,11 +6,11 @@
     align-items: center;
 }
 .carousel-container{
-    width: 50%;
+    width: 60%;
     aspect-ratio: 16/9;
 
     @media (max-width:1024px) {
-        max-width: 80%;
+        width: 80%;
         height: auto;
         aspect-ratio: 3/2;
     }

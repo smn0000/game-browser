@@ -57,15 +57,10 @@ const Carousel = ({ data }: {data:Object[]}) => {
     const handleShowMore = () => {
       setShowMore(true)
     }
-    const handleHideMore = (e:any) =>{
-      if(e.target === e.currentTarget){
-        setShowMore(false)
-        }
-    }
   return (
     <>
       <AnimatePresence>
-      {showMore && <Gameinfo data={card} onClose={handleHideMore}/>}
+      {showMore && <Gameinfo data={card} onClose={() => setShowMore(false)}/>}
       </AnimatePresence>
 
       <div className='carousel'>
