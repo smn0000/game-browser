@@ -7,7 +7,7 @@ import Search from "./pages/Search/Search"
 
 function App() {
 
-  const [search, setSearch]:any= useState(null)
+  const [search, setSearch] = useState<string>('')
     return (
     <>
     <Navbar setSearch={setSearch}/>

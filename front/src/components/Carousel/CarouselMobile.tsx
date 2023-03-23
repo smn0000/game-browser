@@ -2,17 +2,10 @@ import {useState, useReducer} from 'react'
 import './styles.scss'
 import { motion, AnimatePresence } from 'framer-motion'
 import GameinfoMobile from '../Gameinfo/GameinfoMobile'
-
-interface Object {
-  id: number
-  name: string
-  background_image: string
-  released: string
-  rating: number
-  }
+import {cardData} from '../../../interfaces'
 
 
-const CarouselMobile = ({data} : {data:Object[]}) => {
+const CarouselMobile = ({data} : {data:cardData[]}) => {
 
 
     const usePrev = (state:any) =>{

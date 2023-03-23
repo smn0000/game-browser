@@ -2,14 +2,16 @@ import {useState, useEffect} from 'react'
 import { AnimatePresence, motion } from 'framer-motion' 
 import Card from '../../components/Card/Card'
 import './styles.scss'
+import {cardData} from '../../../interfaces'
 
 
 const Search = ({search} : {search:string}) => {
 
-  const [data, setData] = useState<any[]>([])
+  const [data, setData] = useState<cardData[]>([])
 
   useEffect(() => {
-    if(search !== null){
+    if(search !== ''){
+      setData([])
       fetch(`api/search?search=${search}`)
       .then(response => response.json())
       .then(data => setData(data))
@@ -20,13 +22,16 @@ const Search = ({search} : {search:string}) => {
 
   return (
     <AnimatePresence>
-      <h1>Search results for: {search}</h1>
+      
     {data.length !== 0  && 
-    
+    <>
+      <motion.h1 initial={{y:'-100%'}} animate={{y:0}}>Search results for: {search}</motion.h1>
  
       <div className='search-container'> 
         {data.map(el => <Card data={el} key={el.id}/>)}
       </div>
+      
+    </>
       }
   </AnimatePresence>)
 }

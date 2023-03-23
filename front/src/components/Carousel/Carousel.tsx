@@ -3,17 +3,11 @@ import './styles.scss'
 import { BiCaretLeft, BiCaretRight } from 'react-icons/bi'
 import { motion, AnimatePresence } from 'framer-motion'
 import Gameinfo from '../Gameinfo/Gameinfo'
+import {cardData} from '../../../interfaces'
 
-interface Object {
-  id: number
-  name: string
-  background_image: string
-  released: string
-  rating: number
-  }
 
-const Carousel = ({ data }: {data:Object[]}) => {
-    
+
+const Carousel = ({ data }: {data:cardData[]}) => {
   
     const usePrev = (state:any) =>{
       const [tuple, setTuple] = useState([null, state])

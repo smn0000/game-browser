@@ -1,16 +1,9 @@
 import './styles.scss'
 import { AnimatePresence, motion } from 'framer-motion'
-
-type data ={
-    id: number
-    name: string
-    released: string
-    rating: number
-    background_image: string
-}
+import {cardData} from '../../../interfaces'
 
 
-const Gameinfo = ( {data, onClose} :{data: data, onClose:any}) => {
+const Gameinfo = ( {data, onClose} :{data: cardData, onClose:any}) => {
     
   const handleClose = (e:any) =>{
     if(e.target === e.currentTarget) onClose()

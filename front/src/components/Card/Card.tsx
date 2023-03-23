@@ -4,22 +4,15 @@ import { useState } from 'react'
 import { useMediaQuery } from 'usehooks-ts'
 import Gameinfo from '../Gameinfo/Gameinfo'
 import GameinfoMobile from '../Gameinfo/GameinfoMobile'
+import {cardData} from '../../../interfaces'
 
-
-interface Object {
-    id: number
-    name: string
-    background_image: string
-    released: string
-    rating: number
-    }
-
-
-
-const Card = ({data} :{data:Object}) => {
+const Card = ({ data }:{ data:cardData }) => {
 
     const [showInfo, setShowInfo] = useState(false)
     const isMobile = useMediaQuery('(max-width:1024px)')
+
+    const noImage = new URL('../../../static/noimage.png', import.meta.url).href
+   if(!data.background_image) data.background_image = noImage
 
     //DISABLES POINTER EVENTS IF Y ISN'T EQUAL 0 
     const y = useMotionValue(0)
@@ -41,18 +34,22 @@ const Card = ({data} :{data:Object}) => {
         hidden: {
         opacity:0, 
         y:-50,
+        },
+
+        exit:{
+          opacity:0,
+          y:'20vh'
         }
     }
 
   return (
-    <motion.div className='search-card' onClick={()=>setShowInfo(true)} variants={cardAnimation} initial='hidden' animate='visible' exit='hidden' style={{backgroundImage: `url(${data.background_image})`, y, pointerEvents }}>
+    <motion.div className='search-card' onClick={()=>setShowInfo(true)} variants={cardAnimation} initial='hidden' animate='visible' exit='exit' style={{backgroundImage: `url(${data.background_image})`, y, pointerEvents }}>
         {showInfo && 
         <>
             {isMobile ? <GameinfoMobile data={data} onClose={() => setShowInfo(false)}/> : <Gameinfo data={data} onClose={() => setShowInfo(false)}/>}
         </>
         }
 
-        
         {data.name}
     </motion.div>
   )
