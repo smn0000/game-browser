@@ -3,7 +3,6 @@ import Carousel from '../../components/Carousel/Carousel'
 import CarouselMobile from '../../components/Carousel/CarouselMobile'
 import { useMediaQuery } from 'usehooks-ts'
 import { useState, useEffect } from 'react'
-import axios from 'axios'
 
 const Landing = () => {
   const isMobile:boolean = useMediaQuery('(max-width: 1024px)')
@@ -13,7 +12,7 @@ const Landing = () => {
 
   useEffect(()=>{
       fetch('/api/carousel')
-      .then(response => {console.log(response); return response.json()})
+      .then(response => response.json())
       .then(data => setCarouselData(data))
       .catch(err => console.error(err))
     }

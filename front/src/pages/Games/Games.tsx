@@ -1,8 +1,11 @@
-import React from 'react'
+import Category from '../../components/Category/Category'
 
 const Game = () => {
   return (
-    <div>Game</div>
+  <>
+    <Category name={'shooter'}/>
+    <Category name={'rpg'}/>
+    </>
   )
 }
 

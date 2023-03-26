@@ -1,6 +1,6 @@
 import './styles.scss'
 import { AnimatePresence, motion} from 'framer-motion'
-import {cardData} from '../../../interfaces'
+import {cardData} from '../../../types'
 
 
 const GameinfoMobile = ( {data, onClose} :{data: cardData, onClose:any}) => {

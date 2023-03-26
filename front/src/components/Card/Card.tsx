@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { useMediaQuery } from 'usehooks-ts'
 import Gameinfo from '../Gameinfo/Gameinfo'
 import GameinfoMobile from '../Gameinfo/GameinfoMobile'
-import {cardData} from '../../../interfaces'
+import {cardData} from '../../../types'
 
 const Card = ({ data }:{ data:cardData }) => {
 
@@ -43,7 +43,7 @@ const Card = ({ data }:{ data:cardData }) => {
     }
 
   return (
-    <motion.div className='search-card' onClick={()=>setShowInfo(true)} variants={cardAnimation} initial='hidden' animate='visible' exit='exit' style={{backgroundImage: `url(${data.background_image})`, y, pointerEvents }}>
+    <motion.div className='card' onClick={()=>setShowInfo(true)} variants={cardAnimation} initial='hidden' animate='visible' exit='exit' style={{backgroundImage: `url(${data.background_image})`, y, pointerEvents }}>
         {showInfo && 
         <>
             {isMobile ? <GameinfoMobile data={data} onClose={() => setShowInfo(false)}/> : <Gameinfo data={data} onClose={() => setShowInfo(false)}/>}

@@ -2,7 +2,7 @@ import {useState, useReducer} from 'react'
 import './styles.scss'
 import { motion, AnimatePresence } from 'framer-motion'
 import GameinfoMobile from '../Gameinfo/GameinfoMobile'
-import {cardData} from '../../../interfaces'
+import {cardData} from '../../../types'
 
 
 const CarouselMobile = ({data} : {data:cardData[]}) => {
@@ -67,7 +67,7 @@ const CarouselMobile = ({data} : {data:cardData[]}) => {
             {showMore && <GameinfoMobile data={card} onClose={handleShowMore}/>}
         </AnimatePresence>
         <div className='carousel'>
-            <div className='card'>
+            <div className='carousel__card'>
             <AnimatePresence custom={direction}>
                 <motion.div className='item' style={{backgroundImage:`url(${card.background_image})`}} key={count} onDoubleClick={handleShowMore}
                 initial='initial' animate='animate' exit='exit' variants={cardAnimation} custom={direction} transition={{duration:.5}}  onPanEnd={(event , info) => Math.abs(Number(info.offset.x)) > 50 && handlePan(info.offset.x)}>

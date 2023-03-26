@@ -3,7 +3,7 @@ import './styles.scss'
 import { BiCaretLeft, BiCaretRight } from 'react-icons/bi'
 import { motion, AnimatePresence } from 'framer-motion'
 import Gameinfo from '../Gameinfo/Gameinfo'
-import {cardData} from '../../../interfaces'
+import {cardData} from '../../../types'
 
 
 
@@ -59,7 +59,7 @@ const Carousel = ({ data }: {data:cardData[]}) => {
 
       <div className='carousel'>
           <button className='sidebar prev-btn' onClick={() => {dispatch({type:'PREVIOUS'}); setCount(previous=>previous-1)}}><BiCaretLeft/></button>
-          <div className='card'>
+          <div className='carousel__card'>
             <AnimatePresence custom={direction}>
               <motion.div className='item' style={{backgroundImage:`url(${card.background_image})`}} key={count} onClick={handleShowMore}
               initial='initial' animate='animate' exit='exit' variants={cardAnimation} custom={direction} transition={{duration:.5}} >

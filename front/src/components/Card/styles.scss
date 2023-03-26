@@ -1,4 +1,4 @@
-.search-card{
+.card{
     width: 15rem;
     aspect-ratio: 9/16;
     flex-grow: .3;
@@ -7,7 +7,11 @@
     background-repeat: no-repeat;
     cursor: pointer;
 
-    @media (max-width:1024px) {
+    @media (max-width:560px) {
         width: 10rem;
+    }
+
+    @media (max-width:400px) {
+        width: 8rem;
     }
 }
