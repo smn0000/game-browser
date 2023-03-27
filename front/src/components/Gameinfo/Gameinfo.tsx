@@ -4,7 +4,6 @@ import {cardData} from '../../types'
 import { RiComputerFill, RiPlaystationFill, RiXboxFill, RiSwitchFill, RiAppStoreFill, RiAndroidFill, RiAppleFill, RiSteamFill, RiGooglePlayFill } from 'react-icons/ri'
 import { SiNintendo, SiLinux, SiWii, SiNintendogamecube, SiAtari, SiSega, SiGogdotcom, SiEpicgames } from 'react-icons/si'
 
-
 const Gameinfo = ( {data, onClose} :{data: cardData, onClose:any}) => {
    
   const platformList = [
