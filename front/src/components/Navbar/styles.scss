@@ -74,6 +74,8 @@ input{
 
 .mobile-nav{
     display: flex;
+    justify-content: space-between;
+    padding: 0 1rem;
 }
 
 .hamburger{
@@ -127,20 +129,18 @@ input{
         
     }
 
-   .data-by{
-    height: 100%;
-    display: flex;
-    align-items: end;
-    padding: 1rem;
-    text-align: right;
-
-    p{
-        width: 100%;
-        font-size: 1rem;
-    }
-   }
+   
 }
 
+.data-by{
+    height: 100%;
+    padding: 1rem;
+    text-align: right;
+    display: flex;
+    align-items: center;
+
+   }
+   
 .data-attribution{
     font-size: 1rem;
 

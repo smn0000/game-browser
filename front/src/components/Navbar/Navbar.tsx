@@ -44,7 +44,7 @@ const NavbarMobile = ({handleSearch}: {handleSearch:any}) => {
       opacity:1, 
       originX:0, 
       originY:0,
-      transition:{ duration: .25, when:'beforeChildren', staggerChildren: .2},
+      transition:{ duration: .2, when:'beforeChildren', staggerChildren: .1},
     },
    
   }
@@ -61,6 +61,7 @@ const NavbarMobile = ({handleSearch}: {handleSearch:any}) => {
       <button className="hamburger" onClick={() => setShowMenu(current => !current)}>
         <BiMenu size='48px'/>
       </button>
+      <div className="data-by"><div className="data-attribution">Data provided by <a href="https://rawg.io/" target='_blank'>RAWG.IO</a></div></div>
 
       <AnimatePresence>
       {showMenu && 
@@ -82,7 +83,7 @@ const NavbarMobile = ({handleSearch}: {handleSearch:any}) => {
               <motion.li variants={animateMenuChildren}><Link to="/games" onClick={() => setShowMenu(current => !current)}>Games</Link></motion.li>
           </ul>
 
-          <motion.div variants={animateMenuChildren} className="data-by"><div className="data-attribution">Data provided by <a href="https://rawg.io/" target='_blank'>RAWG.IO</a></div></motion.div>
+          
 
         </motion.div>}
       </AnimatePresence>

@@ -9,6 +9,7 @@ const Gameinfo = ( {data, onClose} :{data: cardData, onClose:any}) => {
     if(e.target === e.currentTarget) onClose()
   }
 
+
   return (
     
         <motion.div className='more-container' onMouseDown={(e) => handleClose(e)} initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0 }} transition={{duration:.15}}>

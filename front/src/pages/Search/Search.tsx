@@ -25,7 +25,7 @@ const Search = ({search} : {search:string}) => {
       
     {data.length !== 0  && 
     <>
-      <motion.h1 initial={{y:'-100%'}} animate={{y:0}}>Search results for: {search}</motion.h1>
+      <motion.h1 initial={{y:'10', opacity:.5}} animate={{y:0, opacity:1}}>{search}</motion.h1>
  
       <div className='search-container'> 
         {data.map(el => <Card data={el} key={el.id}/>)}

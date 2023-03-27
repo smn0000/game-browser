@@ -6,6 +6,9 @@
     background-position: center;
     background-repeat: no-repeat;
     cursor: pointer;
+    box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.397);
+    border-radius: 1rem;
+    padding: .5rem;
 
     @media (max-width:560px) {
         width: 10rem;
@@ -13,5 +16,9 @@
 
     @media (max-width:400px) {
         width: 8rem;
+    }
+
+    @media (max-width:330px) {
+        width: 6rem;
     }
 }
