@@ -26,24 +26,18 @@ const Card = ({ data }:{ data:cardData }) => {
         opacity:1,
         y:0,
         transition:{
-            duration:.2, 
-            type:"spring", 
-            stiffness:125}
+            duration:.2}
         },
 
         hidden: {
-        opacity:0, 
-        y:-50,
+        opacity:.5, 
+        y:10,
         },
 
-        exit:{
-          opacity:0,
-          y:'20vh'
-        }
     }
 
   return (
-    <motion.div className='card' onClick={()=>setShowInfo(true)} variants={cardAnimation} initial='hidden' animate='visible' exit='exit' style={{backgroundImage: `url(${data.background_image})`, y, pointerEvents }}>
+    <motion.div className='card' onClick={()=>setShowInfo(true)} variants={cardAnimation} initial='hidden' animate='visible' style={{backgroundImage: `url(${data.background_image})`, y, pointerEvents }}>
         {showInfo && 
         <>
             {isMobile ? <GameinfoMobile data={data} onClose={() => setShowInfo(false)}/> : <Gameinfo data={data} onClose={() => setShowInfo(false)}/>}

@@ -15,7 +15,7 @@ let cache = apicache.middleware
 
 const limiter = rateLimit({
   windowMs: 1000,
-  max:10
+  max:20
 })
 
 app.use(limiter)
@@ -106,41 +106,41 @@ app.get('/api/platformer', cache('24 hour'), (req, res) =>{
 })
 
 app.get('/api/racing', cache('24 hour'), (req, res) =>{
-  axios.get(`https://api.rawg.io/api/games?key=${process.env.API_KEY}&genres=racing&page_size=40&metacritic=90,100`)
+  axios.get(`https://api.rawg.io/api/games?key=${process.env.API_KEY}&genres=racing&page_size=40&metacritic=80,100`)
     .then(response => res.json(response.data.results))
 })
 
 app.get('/api/mmo', cache('24 hour'), (req, res) =>{
-  axios.get(`https://api.rawg.io/api/games?key=${process.env.API_KEY}&genres=massively-multiplayer&page_size=40&metacritic=90,100`)
+  axios.get(`https://api.rawg.io/api/games?key=${process.env.API_KEY}&genres=massively-multiplayer&page_size=40&metacritic=80,100`)
     .then(response => res.json(response.data.results))
 })
 
 app.get('/api/sports', cache('24 hour'), (req, res) =>{
-  axios.get(`https://api.rawg.io/api/games?key=${process.env.API_KEY}&genres=sports&page_size=40&metacritic=90,100`)
+  axios.get(`https://api.rawg.io/api/games?key=${process.env.API_KEY}&genres=sports&page_size=40&metacritic=80,100`)
     .then(response => res.json(response.data.results))
 })
 
 app.get('/api/fighting', cache('24 hour'), (req, res) =>{
-  axios.get(`https://api.rawg.io/api/games?key=${process.env.API_KEY}&genres=fighting&page_size=40&metacritic=90,100`)
+  axios.get(`https://api.rawg.io/api/games?key=${process.env.API_KEY}&genres=fighting&page_size=40&metacritic=50,100`)
     .then(response => res.json(response.data.results))
 })
 
 app.get('/api/family', cache('24 hour'), (req, res) =>{
-  axios.get(`https://api.rawg.io/api/games?key=${process.env.API_KEY}&genres=family&page_size=40&metacritic=90,100`)
+  axios.get(`https://api.rawg.io/api/games?key=${process.env.API_KEY}&genres=family&page_size=40&metacritic=50,100`)
     .then(response => res.json(response.data.results))
 })
 
-app.get('/api/board', cache('24 hour'), (req, res) =>{
-  axios.get(`https://api.rawg.io/api/games?key=${process.env.API_KEY}&genres=board-games&page_size=40&metacritic=90,100`)
+app.get('/api/board',  cache('24 hour'), (req, res) =>{
+  axios.get(`https://api.rawg.io/api/games?key=${process.env.API_KEY}&genres=board-games&page_size=40&metacritic=50,100`)
     .then(response => res.json(response.data.results))
 })
 
-app.get('/api/educational', cache('24 hour'), (req, res) =>{
-  axios.get(`https://api.rawg.io/api/games?key=${process.env.API_KEY}&genres=educational&page_size=40&metacritic=90,100`)
+app.get('/api/educational',  cache('24 hour'), (req, res) =>{
+  axios.get(`https://api.rawg.io/api/games?key=${process.env.API_KEY}&genres=educational&page_size=40&metacritic=50,100`)
     .then(response => res.json(response.data.results))
 })
 
-app.get('/api/card', cache('24 hour'), (req, res) =>{
+app.get('/api/card', cache('24 hour') ,(req, res) =>{
   axios.get(`https://api.rawg.io/api/games?key=${process.env.API_KEY}&genres=card&page_size=40&metacritic=90,100`)
     .then(response => res.json(response.data.results))
 })
