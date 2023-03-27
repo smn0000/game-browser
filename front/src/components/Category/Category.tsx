@@ -1,4 +1,4 @@
-import { category, cardData } from '../../../types'
+import { category, cardData } from '../../types'
 import { useState, useEffect } from 'react'
 import { BiChevronsDown } from 'react-icons/bi'
 import { motion, AnimatePresence, animate } from 'framer-motion'
