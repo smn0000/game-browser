@@ -13,6 +13,11 @@
     font-size: 3.5rem;
     text-transform: uppercase;
     font-weight: 900;
+    max-width: 100vw;
+    @media (max-width:440px) {
+        font-size: 2rem;
+        
+    }
 }
 
 .category__items{
