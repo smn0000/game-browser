@@ -1,8 +1,8 @@
 import {useState, useReducer} from 'react'
 import './styles.scss'
 import { motion, AnimatePresence } from 'framer-motion'
-import GameinfoMobile from '../Gameinfo/GameinfoMobile'
-import {cardData} from '../../../types'
+import Gameinfo from '../Gameinfo/Gameinfo'
+import {cardData} from '../../types'
 
 
 const CarouselMobile = ({data} : {data:cardData[]}) => {
@@ -64,7 +64,7 @@ const CarouselMobile = ({data} : {data:cardData[]}) => {
   return (
     <>
         <AnimatePresence>
-            {showMore && <GameinfoMobile data={card} onClose={handleShowMore}/>}
+            {showMore && <Gameinfo data={card} onClose={handleShowMore}/>}
         </AnimatePresence>
         <div className='carousel'>
             <div className='carousel__card'>

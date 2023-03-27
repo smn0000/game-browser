@@ -2,7 +2,7 @@ import {useState, useEffect} from 'react'
 import { AnimatePresence, motion } from 'framer-motion' 
 import Card from '../../components/Card/Card'
 import './styles.scss'
-import {cardData} from '../../../types'
+import {cardData} from '../../types'
 
 
 const Search = ({search} : {search:string}) => {

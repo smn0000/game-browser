@@ -3,7 +3,7 @@ import './styles.scss'
 import { BiCaretLeft, BiCaretRight } from 'react-icons/bi'
 import { motion, AnimatePresence } from 'framer-motion'
 import Gameinfo from '../Gameinfo/Gameinfo'
-import {cardData} from '../../../types'
+import {cardData} from '../../types'
 
 
 

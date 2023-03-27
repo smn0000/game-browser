@@ -86,7 +86,7 @@ app.get('/api/casual', cache('24 hour'), (req, res) =>{
 })
 
 app.get('/api/sim', cache('24 hour'), (req, res) =>{
-  axios.get(`https://api.rawg.io/api/games?key=${process.env.API_KEY}&genres=simulation&page_size=40&metacritic=90,100`)
+  axios.get(`https://api.rawg.io/api/games?key=${process.env.API_KEY}&genres=simulation&page_size=40&metacritic=70,100`)
     .then(response => res.json(response.data.results))
 })
 
