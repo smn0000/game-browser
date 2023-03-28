@@ -77,13 +77,15 @@ const Gameinfo = ( {data, onClose} :{data: cardData, onClose:any}) => {
             <motion.div className='more-card' initial={{scale:0}} animate={{scale:1}} exit={{scale:0}}>
               <div className='more-graphic' style={{backgroundImage:`url(${data.background_image})`}}></div>
               <div className='more-info'>
-                <p><span className='info__title'>{data.name}</span></p>
-                <p><span className='info__name'>Released:</span> <span className='info__data'>{data.released}</span></p>
-                <p><span className='info__name'>Rating:</span> <span className='info__data'>{data.rating}/5</span></p>
-                <p><span className='info__name'>Metacritic:</span> <span className='info__data'>{data.metacritic}</span></p>
-                <p><span className='info__name'>Genre:</span> {data.genres.map(el => <span  className='info__data' key={el.id}>{el.name}</span>)}</p>
-                <p><span className='info__name'>Platforms:</span>{ getPlatformIcons(data.platforms).map(el => <span  className='info__data' key={el.id}> {el.icon} </span>)}</p>
-                <p><span className='info__name'>Stores:</span> {getStoreIcons(data.stores).map(el => <span  className='info__data' key={el.id}> {el.icon} </span>)}</p> 
+                <div className='info__wrapper'>
+                  <p><span className='info__title'>{data.name}</span></p>
+                  <p><span className='info__name'>Released:</span> <span className='info__data'>{data.released}</span></p>
+                  <p><span className='info__name'>Rating:</span> <span className='info__data'>{data.rating}/5</span></p>
+                  <p><span className='info__name'>Metacritic:</span> <span className='info__data'>{data.metacritic}</span></p>
+                  <p><span className='info__name'>Genre:</span> {data.genres.map(el => <span  className='info__data' key={el.id}>{el.name}</span>)}</p>
+                  <p><span className='info__name'>Platforms:</span>{ getPlatformIcons(data.platforms).map(el => <span  className='info__data' key={el.id}> {el.icon} </span>)}</p>
+                  <p><span className='info__name'>Stores:</span> {getStoreIcons(data.stores).map(el => <span  className='info__data' key={el.id}> {el.icon} </span>)}</p> 
+                </div>
               </div>
               
             </motion.div>
