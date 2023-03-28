@@ -28,17 +28,17 @@ const Category = ({name}:{name:category}) => {
           <p className='category__name' id={`${name}`} >{name}</p>
           <AnimatePresence>
           {!showAll ?
-            <motion.div key={1} className='category__items' initial={{height:'100vh'}} animate={{height:350}} transition={{duration:.1}}>
+            <motion.div key={1} className='category__items' initial={{height:'100vh'}} animate={{height:360}} transition={{duration:.1}}>
               {data.slice(0,6).map(el => <Card data={el} key={el.id}/>) }
             </motion.div>
             :
-            <motion.div key={2} className='category__items' initial={{height:350}} animate={{height:'auto'}}>
+            <motion.div key={2} className='category__items' initial={{height:360}} animate={{height:'auto'}}>
               {data.map(el => <Card data={el} key={el.id}/>)}
             </motion.div>
             }
           </AnimatePresence>
           <div className='category__more'>
-            <motion.a href={`#${name}`} onClick={() => setShowAll(current=>!current)} variants={animateArrow} custom={showAll} initial="initial" animate='animate'><BiChevronsDown size={'50px'}/></motion.a>
+            <motion.a href={`#${name}`}  onClick={(e) => {setShowAll(current=>!current), !showAll && e.preventDefault()}} variants={animateArrow} custom={showAll} initial="initial" animate='animate'><BiChevronsDown size={'50px'}/></motion.a>
           </div>
       </div>
   )

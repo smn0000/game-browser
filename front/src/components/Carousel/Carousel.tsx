@@ -4,6 +4,7 @@ import { BiCaretLeft, BiCaretRight } from 'react-icons/bi'
 import { motion, AnimatePresence } from 'framer-motion'
 import Gameinfo from '../Gameinfo/Gameinfo'
 import {cardData} from '../../types'
+import { useMediaQuery } from 'usehooks-ts'
 
 
 
@@ -34,6 +35,7 @@ const Carousel = ({ data }: {data:cardData[]}) => {
     const [count, setCount] = useState(0)
     const [showMore, setShowMore] = useState(false)
     const prev:any = usePrev(count)
+    const isMobile:boolean = useMediaQuery('(max-width: 1024px)')
 
 
     let direction:number = prev < count ? 1 : -1
@@ -48,6 +50,19 @@ const Carousel = ({ data }: {data:cardData[]}) => {
       exit: (direction:number) => ({ x: direction === 1 ? '-100%' : '100%' }),
     }
 
+    const handlePan = (offset:number) => {
+      if(!isMobile) return
+      
+      if(offset < 0) {
+        dispatch({type:'NEXT'})
+        setCount(previous=>previous+1)
+      }
+      else{
+        dispatch({type:'PREVIOUS'})
+        setCount(previous=>previous-1)
+      }
+    }
+
     const handleShowMore = () => {
       setShowMore(true)
     }
@@ -58,14 +73,12 @@ const Carousel = ({ data }: {data:cardData[]}) => {
       </AnimatePresence>
 
       <div className='carousel'>
-          <button className='sidebar prev-btn' onClick={() => {dispatch({type:'PREVIOUS'}); setCount(previous=>previous-1)}}><BiCaretLeft/></button>
+          <button className='sidebar' onClick={() => {dispatch({type:'PREVIOUS'}); setCount(previous=>previous-1)}}><BiCaretLeft/></button>
           <div className='carousel__card'>
             <AnimatePresence custom={direction}>
               <motion.div className='item' style={{backgroundImage:`url(${card.background_image})`}} key={count} onClick={handleShowMore}
-              initial='initial' animate='animate' exit='exit' variants={cardAnimation} custom={direction} transition={{duration:.5}} >
-              <p className='title'>{card.name}</p>
-              <p className='rating'>Rating: {card.rating}</p>
-              
+              initial='initial' animate='animate' exit='exit' variants={cardAnimation} custom={direction} transition={{duration:.5}} onPanEnd={(event , info) => Math.abs(Number(info.offset.x)) > 50 && handlePan(info.offset.x)}>
+
               </motion.div>
             </AnimatePresence>
           </div>
@@ -73,19 +86,19 @@ const Carousel = ({ data }: {data:cardData[]}) => {
           <div className='dots'>
                 {data.map(el => el.id===card.id ?
                
-                <motion.button className='dot' key={el.id} initial={{scale:1}} animate={{scale:1.5}} exit={{scale:1}} transition={{duration: .05}}
+                <motion.button className='dot' key={el.id} initial={{scale:1}} animate={{scale:1.5}} exit={{scale:1}} transition={{duration: .2}}
                 onClick={() => {card.id !== el.id && dispatch({type:'GOTO', payload:el.id}); card.id !== el.id && setCount(el.id > card.id ? previous=>previous+1 : previous=>previous-1)}}>
                 </motion.button>
                 
                 :
-                <motion.button className='dot' key={el.id} initial={{scale:1}} transition={{duration: .05}}
+                <motion.button className='dot' key={el.id} initial={{scale:1}} transition={{duration: .2}}
                 onClick={() => {card.id !== el.id && dispatch({type:'GOTO', payload:el.id}); card.id !== el.id && setCount(el.id > card.id ? previous=>previous+1 : previous=>previous-1)}}>
                 </motion.button>
                 )}
                
             </div>
            
-          <button className='sidebar next-btn'onClick={() => {dispatch({type:'NEXT'}); setCount(previous=>previous+1)} }><BiCaretRight/></button>
+          <button className='sidebar'onClick={() => {dispatch({type:'NEXT'}); setCount(previous=>previous+1)} }><BiCaretRight/></button>
       </div>
     </>
   )

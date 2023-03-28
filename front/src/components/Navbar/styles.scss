@@ -76,6 +76,7 @@ input{
     display: flex;
     justify-content: space-between;
     padding: 0 1rem;
+   
 }
 
 .hamburger{
@@ -96,20 +97,21 @@ input{
     height: calc(100vh - 64px);
     width: 100%;
     display: flex;
-    gap: .5rem;
+    gap: 1rem;
     flex-direction: column;
+    font-size: 2rem;
 
     ul{
         display: flex;
         flex-direction: column;
-        gap: .5rem;
+        gap: 1rem;
     }
 
     .search-wrapper{
         order: -1;
         display: flex;
         align-items: center;
-        height: 2rem;
+        height: 2.5rem;
         width: 100%;
         
         .search-button{

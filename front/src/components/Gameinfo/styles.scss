@@ -62,5 +62,26 @@
     > p{
         font-size: 1.2rem;
         display: flex;
+        flex-wrap: wrap;
+    }
+}
+
+.info__title{
+    font-size: 2rem;
+    margin:auto
+}
+
+.info__name{
+    margin-right: 10px;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.info__data{
+    margin-right: 10px;
+    
+    svg{
+        height: 35px;
+        width: 35px;
     }
 }
