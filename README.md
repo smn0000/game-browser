@@ -4,10 +4,6 @@ Game browser built with React and Express
 ## Preview
 https://gamebrowser.up.railway.app/
 
-## Table of contents
-* [Technologies](#technologies)
-* [Features](#features)
-
 ## Technologies
 Project is created with:
 * Node: 16.18.0
