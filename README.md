@@ -4,11 +4,13 @@ Game browser built with React and Express
 ## Preview
 https://gamebrowser.up.railway.app/
 
-## Technologies
-Project is created with:
+## Technologies used
+Project created with:
 * Node: 16.18.0
 * React: 18.2.0
 * Saas: 1.59.2
+* Typescript: 4.9.3
+* Vite: 4.1.0
 * Framer Motion: 10.3.2
 * Express: 4.18.2
 
