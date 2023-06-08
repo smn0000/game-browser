@@ -3,7 +3,7 @@ export interface cardData {
     name: string
     released: string
     rating: number
-    background_image: string | URL
+    background_image: string 
     genres: [{id:number, name:string}]
     metacritic: number
     platforms: [{platform:{id:number, name: string}}]
